@@ -8,12 +8,11 @@
                     <tr class="row">
                         <th class="col-sm-2 text-center">
                             <select id="inputErrorType" class="form-control">
-                                <option selected disabled>Error Type</option>
-                                <option>Acceess</option>
-                                <option>API</option>
-                                <option>Architecture</option>
-                                <option>Authentication</option>
-                                <option>BusLogic</option>
+                                <option selected disabled>Error Type - All</option>
+                                <option>All</option>
+                                {% for option in options%}
+                                    <option>{{option.error_description}}</option>
+                                {% endfor %}
                             </select>
                         </th>
                         <th class="col-sm-5 text-center">Error Description</th>
@@ -26,28 +25,62 @@
                 </thead>
                 <tbody>
                     <tr class="row">
-                        <!-- <th scope="row">1</th> -->
-                        <td class="col-sm-2 text-center">AAA</td>
-                        <td class="col-sm-5 text-center">BBB</td>
-                        <td class="col-sm-1 text-right">1053</td>
-                        <td class="col-sm-1"><select id="inputErrorLevel1" class="form-control">
-                                <option selected>Yes</option>
-                                <option>No</option>
-                            </select>
-                        </td>
-                        <td class="col-sm-1"><select id="inputErrorLevel2" class="form-control">
-                                <option selected>Yes</option>
-                                <option>No</option>
-                            </select>
-                        </td>
-                        <td class="col-sm-1"><select id="inputErrorLevel3" class="form-control">
-                                <option selected>Yes</option>
-                                <option>No</option>
-                            </select>
-                        </td>
-                        <td class="col-sm-1">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </td>
+                        {% for detail in details %}
+                            <td class="col-sm-2 text-center">{{detail.error_id}}</td>
+                            <td class="col-sm-5 text-center">{{detail.detail_description}}</td>
+                            <td class="col-sm-1 text-right">{{detail.cwe_id}}</td>
+                            <td class="col-sm-1"><select id="inputErrorLevel1" class="form-control">
+                                {%if detail.level_1 == '0'%}
+                                    <option selected>Yes</option>
+                                    <option>No</option>
+                                    <option>N/A</option>
+                                {% elif detail.level_1 == '1' %}
+                                    <option>Yes</option>
+                                    <option selected>No</option>
+                                    <option>N/A</option>
+                                {% else %}
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                    <option selected>N/A</option>
+                                {% endif %}
+                                </select>
+                            </td>
+                            <td class="col-sm-1"><select id="inputErrorLevel2" class="form-control">
+                                {%if detail.level_2 == '0'%}
+                                    <option selected>Yes</option>
+                                    <option>No</option>
+                                    <option>N/A</option>
+                                {% elif detail.level_2 == '1' %}
+                                    <option>Yes</option>
+                                    <option selected>No</option>
+                                    <option>N/A</option>
+                                {% else %}
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                    <option selected>N/A</option>
+                                {% endif %}
+                                </select>
+                            </td>
+                            <td class="col-sm-1"><select id="inputErrorLevel3" class="form-control">
+                                {%if detail.level_3 == '0'%}
+                                    <option selected>Yes</option>
+                                    <option>No</option>
+                                    <option>N/A</option>
+                                {% elif detail.level_3 == '1' %}
+                                    <option>Yes</option>
+                                    <option selected>No</option>
+                                    <option>N/A</option>
+                                {% else %}
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                    <option selected>N/A</option>
+                                {% endif %}
+                                </select>
+                            </td>
+                            <td class="col-sm-1">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </td>
+                        {% endfor %}
                     </tr>
                 </tbody>
             </table>

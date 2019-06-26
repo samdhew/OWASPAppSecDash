@@ -86,9 +86,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'OWASP_APPSEC_STANDARDS',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': 'toor',
         'HOST': 'localhost',
-        'PORT': '3306',
+        'PORT': '',
     }
 }
 

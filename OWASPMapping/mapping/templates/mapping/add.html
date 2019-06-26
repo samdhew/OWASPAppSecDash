@@ -8,12 +8,10 @@
                     <div class="form-group col-md-6">
                         <label for="inputErrorType">Error Type</label>
                         <select id="inputErrorType" class="form-control">
-                            <option selected>Acceess</option>
-                            <option>API</option>
-                            <option>Architecture</option>
-                            <option>Authentication</option>
-                            <!-- <option disabled>-----------</option> -->
-                            <option>BusLogic</option>
+                            <option selected disabled>Please Select</option>
+                            {% for option in options%}
+                                <option>{{option.error_description}}</option>
+                            {% endfor %}
                         </select>
                     </div>
                     <div class="form-group col-md-6">
