@@ -1,4 +1,5 @@
 {% extends 'mapping/layout.html' %}
+{% block title %}list of errors {% endblock %}
 {% block content %}
 <div class="container-fluid">
     <div class="row">
@@ -8,10 +9,11 @@
                     <tr class="row">
                         <th class="col-sm-2 text-center">
                             <select id="inputErrorType" class="form-control">
-                                <option selected disabled>Error Type - All</option>
+                                <option selected disabled>Error Type</option>
                                 <option>All</option>
                                 {% for option in options%}
-                                    <option>{{option.error_description}}</option>
+                                <option>
+                                    <!--{{option.error_id}}- -->{{option.error_description}}</option>
                                 {% endfor %}
                             </select>
                         </th>
@@ -24,64 +26,98 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for detail in details %}
                     <tr class="row">
-                        {% for detail in details %}
-                            <td class="col-sm-2 text-center">{{detail.error_id}}</td>
-                            <td class="col-sm-5 text-center">{{detail.detail_description}}</td>
-                            <td class="col-sm-1 text-right">{{detail.cwe_id}}</td>
-                            <td class="col-sm-1"><select id="inputErrorLevel1" class="form-control">
+                        <td class="col-sm-2 text-center">
+                            {%if detail.error_id == 'V1'%}
+                            <p>{{detail.error_id}}-Architecture</p>
+                            {%elif detail.error_id == 'V2'%}
+                            <p>{{detail.error_id}}-Authentication</p>
+                            {%elif detail.error_id == 'V3'%}
+                            <p>{{detail.error_id}}-Session</p>
+                            {%elif detail.error_id == 'V4'%}
+                            <p>{{detail.error_id}}-Access</p>
+                            {%elif detail.error_id == 'V5'%}
+                            <p>{{detail.error_id}}-Validation</p>
+                            {%elif detail.error_id == 'V6'%}
+                            <p>{{detail.error_id}}-Cryptography</p>
+                            {%elif detail.error_id == 'V7'%}
+                            <p>{{detail.error_id}}-Error</p>
+                            {%elif detail.error_id == 'V8'%}
+                            <p>{{detail.error_id}}-Data</p>
+                            {%elif detail.error_id == 'V9'%}
+                            <p>{{detail.error_id}}-Communications</p>
+                            {%elif detail.error_id == 'V10'%}
+                            <p>{{detail.error_id}}-Malicious</p>
+                            {%elif detail.error_id == 'V11'%}
+                            <p>{{detail.error_id}}-BusLogic</p>
+                            {%elif detail.error_id == 'V12'%}
+                            <p>{{detail.error_id}}-API</p>
+                            {%elif detail.error_id == 'V13'%}
+                            <p>{{detail.error_id}}-Files</p>
+                            {%elif detail.error_id == 'V14'%}
+                            <p>{{detail.error_id}}-Config</p>
+                            {% endif %}
+                        </td>
+                        <td class="col-sm-5 text-center">
+                            <p>{{detail.detail_description}}</p>
+                        </td>
+                        <td class="col-sm-1 text-right">
+                            {{detail.cwe_id}}
+                        </td>
+                        <td class="col-sm-1"><select id="inputErrorLevel1" class="form-control">
                                 {%if detail.level_1 == '0'%}
-                                    <option selected>Yes</option>
-                                    <option>No</option>
-                                    <option>N/A</option>
+                                <option selected>Yes</option>
+                                <option>No</option>
+                                <option>N/A</option>
                                 {% elif detail.level_1 == '1' %}
-                                    <option>Yes</option>
-                                    <option selected>No</option>
-                                    <option>N/A</option>
+                                <option>Yes</option>
+                                <option selected>No</option>
+                                <option>N/A</option>
                                 {% else %}
-                                    <option>Yes</option>
-                                    <option>No</option>
-                                    <option selected>N/A</option>
+                                <option>Yes</option>
+                                <option>No</option>
+                                <option selected>N/A</option>
                                 {% endif %}
-                                </select>
-                            </td>
-                            <td class="col-sm-1"><select id="inputErrorLevel2" class="form-control">
+                            </select>
+                        </td>
+                        <td class="col-sm-1"><select id="inputErrorLevel2" class="form-control">
                                 {%if detail.level_2 == '0'%}
-                                    <option selected>Yes</option>
-                                    <option>No</option>
-                                    <option>N/A</option>
+                                <option selected>Yes</option>
+                                <option>No</option>
+                                <option>N/A</option>
                                 {% elif detail.level_2 == '1' %}
-                                    <option>Yes</option>
-                                    <option selected>No</option>
-                                    <option>N/A</option>
+                                <option>Yes</option>
+                                <option selected>No</option>
+                                <option>N/A</option>
                                 {% else %}
-                                    <option>Yes</option>
-                                    <option>No</option>
-                                    <option selected>N/A</option>
+                                <option>Yes</option>
+                                <option>No</option>
+                                <option selected>N/A</option>
                                 {% endif %}
-                                </select>
-                            </td>
-                            <td class="col-sm-1"><select id="inputErrorLevel3" class="form-control">
+                            </select>
+                        </td>
+                        <td class="col-sm-1"><select id="inputErrorLevel3" class="form-control">
                                 {%if detail.level_3 == '0'%}
-                                    <option selected>Yes</option>
-                                    <option>No</option>
-                                    <option>N/A</option>
+                                <option selected>Yes</option>
+                                <option>No</option>
+                                <option>N/A</option>
                                 {% elif detail.level_3 == '1' %}
-                                    <option>Yes</option>
-                                    <option selected>No</option>
-                                    <option>N/A</option>
+                                <option>Yes</option>
+                                <option selected>No</option>
+                                <option>N/A</option>
                                 {% else %}
-                                    <option>Yes</option>
-                                    <option>No</option>
-                                    <option selected>N/A</option>
+                                <option>Yes</option>
+                                <option>No</option>
+                                <option selected>N/A</option>
                                 {% endif %}
-                                </select>
-                            </td>
-                            <td class="col-sm-1">
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </td>
-                        {% endfor %}
+                            </select>
+                        </td>
+                        <td class="col-sm-1">
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </td>
                     </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

@@ -9,20 +9,23 @@ def layout(request):
     return render(request, 'mapping/layout.html')
 
 
-def list(request):
-    options = tbl_OAS_ERRORTYPES.objects.all()
+def listAll(request):
+    options = tbl_OAS_ERRORTYPES.objects.all().order_by('error_description')
     op_details = tbl_OAS_ERRORDETAILS.objects.all()
-    print(op_details.values());
-    props = { 
-        'options' : options,
-        'details' : op_details,
+    # print(op_details.values())
+    props = {
+        'options': options,
+        'details': op_details,
     }
     return render(request, 'mapping/list.html', props)
 
 
 def add(request):
-    options = tbl_OAS_ERRORTYPES.objects.all()
-    props = { 
-        'options' : options
+    options = tbl_OAS_ERRORTYPES.objects.all().order_by('error_description')
+    op_details = tbl_OAS_ERRORDETAILS.objects.all().order_by('-detail_id')[:5]
+    # print(op_details.values())
+    props = {
+        'options': options,
+        'details': op_details,
     }
     return render(request, 'mapping/add.html', props)
